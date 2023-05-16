@@ -133,7 +133,7 @@ func newConsensusTest() *ConsensusTest {
 	return ct
 }
 
-func (test *ConsensusTest) Create(N int, create func()) {
+func (*ConsensusTest) Create(N int, create func()) {
 	for i := 0; i < N; i++ {
 		create()
 	}

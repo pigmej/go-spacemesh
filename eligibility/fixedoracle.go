@@ -35,7 +35,7 @@ func New(logger log.Log) *FixedRolacle {
 }
 
 // IsIdentityActiveOnConsensusView is use to satisfy the API, currently always returns true.
-func (fo *FixedRolacle) IsIdentityActiveOnConsensusView(ctx context.Context, edID types.NodeID, layer types.LayerID) (bool, error) {
+func (*FixedRolacle) IsIdentityActiveOnConsensusView(ctx context.Context, edID types.NodeID, layer types.LayerID) (bool, error) {
 	return true, nil
 }
 
@@ -182,7 +182,7 @@ func hashLayerAndRound(logger log.Log, instanceID types.LayerID, round uint32) t
 }
 
 // Validate is required to conform to the Rolacle interface, but should never be called.
-func (fo *FixedRolacle) Validate(context.Context, types.LayerID, uint32, int, types.NodeID, types.VrfSignature, uint16) (bool, error) {
+func (*FixedRolacle) Validate(context.Context, types.LayerID, uint32, int, types.NodeID, types.VrfSignature, uint16) (bool, error) {
 	panic("implement me!")
 }
 

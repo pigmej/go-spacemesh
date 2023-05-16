@@ -30,7 +30,7 @@ func (ms *MultiSig) ExecGas(method uint8) uint64 {
 }
 
 // MaxSpend returns amount specified in the SpendArguments.
-func (ms *MultiSig) MaxSpend(method uint8, args any) (uint64, error) {
+func (*MultiSig) MaxSpend(method uint8, args any) (uint64, error) {
 	switch method {
 	case core.MethodSpawn:
 		return 0, nil
@@ -66,6 +66,6 @@ func (ms *MultiSig) Verify(host core.Host, raw []byte, dec *scale.Decoder) bool 
 }
 
 // Spend transfers an amount to the address specified in SpendArguments.
-func (ms *MultiSig) Spend(host core.Host, args *SpendArguments) error {
+func (*MultiSig) Spend(host core.Host, args *SpendArguments) error {
 	return host.Transfer(args.Destination, args.Amount)
 }

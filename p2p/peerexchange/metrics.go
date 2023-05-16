@@ -57,7 +57,7 @@ func (c *collector) Stop() {
 	prometheus.Unregister(c)
 }
 
-func (c *collector) Describe(chan<- *prometheus.Desc) {
+func (*collector) Describe(chan<- *prometheus.Desc) {
 }
 
 func (c *collector) Collect(chan<- prometheus.Metric) {

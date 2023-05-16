@@ -22,7 +22,7 @@ type Wallet struct {
 }
 
 // MaxSpend returns amount specified in the SpendArguments for Spend method.
-func (s *Wallet) MaxSpend(method uint8, args any) (uint64, error) {
+func (*Wallet) MaxSpend(method uint8, args any) (uint64, error) {
 	switch method {
 	case core.MethodSpawn:
 		return 0, nil
@@ -48,18 +48,18 @@ func (s *Wallet) Verify(host core.Host, raw []byte, dec *scale.Decoder) bool {
 }
 
 // Spend transfers an amount to the address specified in SpendArguments.
-func (s *Wallet) Spend(host core.Host, args *SpendArguments) error {
+func (*Wallet) Spend(host core.Host, args *SpendArguments) error {
 	return host.Transfer(args.Destination, args.Amount)
 }
 
-func (s *Wallet) BaseGas(method uint8) uint64 {
+func (*Wallet) BaseGas(method uint8) uint64 {
 	return BaseGas(method)
 }
 
-func (s *Wallet) LoadGas() uint64 {
+func (*Wallet) LoadGas() uint64 {
 	return LoadGas()
 }
 
-func (s *Wallet) ExecGas(method uint8) uint64 {
+func (*Wallet) ExecGas(method uint8) uint64 {
 	return ExecGas(method)
 }

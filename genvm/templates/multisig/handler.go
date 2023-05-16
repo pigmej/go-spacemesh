@@ -36,7 +36,7 @@ type handler struct {
 }
 
 // Parse header and arguments.
-func (h *handler) Parse(host core.Host, method uint8, decoder *scale.Decoder) (output core.ParseOutput, err error) {
+func (*handler) Parse(host core.Host, method uint8, decoder *scale.Decoder) (output core.ParseOutput, err error) {
 	var p core.Payload
 	if _, err = p.DecodeScale(decoder); err != nil {
 		err = fmt.Errorf("%w: %s", core.ErrMalformed, err.Error())
@@ -48,7 +48,7 @@ func (h *handler) Parse(host core.Host, method uint8, decoder *scale.Decoder) (o
 }
 
 // New instantiates k-multisig instance.
-func (h *handler) New(args any) (core.Template, error) {
+func (*handler) New(args any) (core.Template, error) {
 	spawn := args.(*SpawnArguments)
 	if spawn.Required == 0 {
 		return nil, fmt.Errorf("number of required signatures must be larger than zero")
@@ -63,7 +63,7 @@ func (h *handler) New(args any) (core.Template, error) {
 }
 
 // Load k-multisig instance from stored state.
-func (h *handler) Load(state []byte) (core.Template, error) {
+func (*handler) Load(state []byte) (core.Template, error) {
 	decoder := scale.NewDecoder(bytes.NewReader(state))
 	var ms MultiSig
 	if _, err := ms.DecodeScale(decoder); err != nil {
@@ -73,7 +73,7 @@ func (h *handler) Load(state []byte) (core.Template, error) {
 }
 
 // Exec spawn or spend based on the method selector.
-func (h *handler) Exec(host core.Host, method uint8, args scale.Encodable) error {
+func (*handler) Exec(host core.Host, method uint8, args scale.Encodable) error {
 	switch method {
 	case core.MethodSpawn:
 		if err := host.Spawn(args); err != nil {
@@ -90,7 +90,7 @@ func (h *handler) Exec(host core.Host, method uint8, args scale.Encodable) error
 }
 
 // Args ...
-func (h *handler) Args(method uint8) scale.Type {
+func (*handler) Args(method uint8) scale.Type {
 	switch method {
 	case core.MethodSpawn:
 		return &SpawnArguments{}

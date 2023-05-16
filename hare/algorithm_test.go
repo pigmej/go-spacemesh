@@ -116,7 +116,7 @@ type mockCommitTracker struct {
 	certificate           *Certificate
 }
 
-func (mct *mockCommitTracker) CommitCount() *CountInfo {
+func (*mockCommitTracker) CommitCount() *CountInfo {
 	return &CountInfo{}
 }
 

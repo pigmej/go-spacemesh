@@ -29,7 +29,7 @@ func (s VRFSigner) PublicKey() *PublicKey {
 }
 
 // LittleEndian indicates whether byte order in a signature is little-endian.
-func (s VRFSigner) LittleEndian() bool {
+func (VRFSigner) LittleEndian() bool {
 	return true
 }
 

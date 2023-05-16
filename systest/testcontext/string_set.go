@@ -12,7 +12,7 @@ func (s stringSet) Set(val string) error {
 	return nil
 }
 
-func (s stringSet) Type() string {
+func (stringSet) Type() string {
 	return "[]string"
 }
 

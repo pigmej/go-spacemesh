@@ -36,7 +36,7 @@ func (s *StringToUint64Value) Set(val string) error {
 }
 
 // Type returns stringToUint64 type.
-func (s *StringToUint64Value) Type() string {
+func (*StringToUint64Value) Type() string {
 	return "string=uint64"
 }
 

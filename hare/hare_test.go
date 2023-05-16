@@ -60,13 +60,13 @@ func (mcp *mockConsensusProcess) Start() {
 	mcp.t <- mockReport{mcp.id, mcp.set, true, false}
 }
 
-func (mcp *mockConsensusProcess) Stop() {}
+func (*mockConsensusProcess) Stop() {}
 
 func (mcp *mockConsensusProcess) ID() types.LayerID {
 	return mcp.id
 }
 
-func (mcp *mockConsensusProcess) SetInbox(_ any) {
+func (*mockConsensusProcess) SetInbox(_ any) {
 }
 
 var _ Consensus = (*mockConsensusProcess)(nil)

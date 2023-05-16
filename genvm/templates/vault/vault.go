@@ -69,23 +69,23 @@ func (v *Vault) Spend(host core.Host, to core.Address, amount uint64) error {
 }
 
 // MaxSpend is noop for this template type, principal of this account type can't submit transactions.
-func (v *Vault) MaxSpend(uint8, any) (uint64, error) {
+func (*Vault) MaxSpend(uint8, any) (uint64, error) {
 	return 0, nil
 }
 
-func (v *Vault) BaseGas(uint8) uint64 {
+func (*Vault) BaseGas(uint8) uint64 {
 	return 0
 }
 
-func (v *Vault) LoadGas() uint64 {
+func (*Vault) LoadGas() uint64 {
 	return 0
 }
 
-func (v *Vault) ExecGas(uint8) uint64 {
+func (*Vault) ExecGas(uint8) uint64 {
 	return 0
 }
 
 // Verify always returns false.
-func (v *Vault) Verify(core.Host, []byte, *scale.Decoder) bool {
+func (*Vault) Verify(core.Host, []byte, *scale.Decoder) bool {
 	return false
 }

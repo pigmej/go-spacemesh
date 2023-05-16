@@ -130,7 +130,7 @@ var (
 
 // ContextuallyValidateMessage checks if the message is contextually valid.
 // Returns nil if the message is contextually valid or a suitable error otherwise.
-func (v *syntaxContextValidator) ContextuallyValidateMessage(ctx context.Context, m *Message, currentK uint32) error {
+func (*syntaxContextValidator) ContextuallyValidateMessage(ctx context.Context, m *Message, currentK uint32) error {
 	if m == nil {
 		return errNilMsg
 	}

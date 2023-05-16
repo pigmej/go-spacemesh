@@ -37,28 +37,28 @@ func NewConnectionsMeeter() *ConnectionsMeeter {
 }
 
 // Listen called when network starts listening on an addr.
-func (c *ConnectionsMeeter) Listen(network.Network, ma.Multiaddr) {}
+func (*ConnectionsMeeter) Listen(network.Network, ma.Multiaddr) {}
 
 // ListenClose called when network stops listening on an addr.
-func (c *ConnectionsMeeter) ListenClose(network.Network, ma.Multiaddr) {}
+func (*ConnectionsMeeter) ListenClose(network.Network, ma.Multiaddr) {}
 
 // Connected called when a connection opened.
-func (c *ConnectionsMeeter) Connected(network.Network, network.Conn) {
+func (*ConnectionsMeeter) Connected(network.Network, network.Conn) {
 	connections.WithLabelValues().Inc()
 }
 
 // Disconnected called when a connection closed.
-func (c *ConnectionsMeeter) Disconnected(network.Network, network.Conn) {
+func (*ConnectionsMeeter) Disconnected(network.Network, network.Conn) {
 	connections.WithLabelValues().Dec()
 }
 
 // OpenedStream called when a stream opened.
-func (c *ConnectionsMeeter) OpenedStream(_ network.Network, str network.Stream) {
+func (*ConnectionsMeeter) OpenedStream(_ network.Network, str network.Stream) {
 	streamsPerProtocol.WithLabelValues(string(str.Protocol())).Inc()
 }
 
 // ClosedStream called when a stream closed.
-func (c *ConnectionsMeeter) ClosedStream(_ network.Network, str network.Stream) {
+func (*ConnectionsMeeter) ClosedStream(_ network.Network, str network.Stream) {
 	protocolID := string(str.Protocol())
 	streamsPerProtocol.WithLabelValues(protocolID).Dec()
 
