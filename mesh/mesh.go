@@ -430,7 +430,7 @@ func (msh *Mesh) pushLayersToState(ctx context.Context, logger log.Log, from, to
 	return nil
 }
 
-func (msh *Mesh) getBlockToApply(validBlocks []*types.Block) *types.Block {
+func (*Mesh) getBlockToApply(validBlocks []*types.Block) *types.Block {
 	if len(validBlocks) == 0 {
 		return nil
 	}

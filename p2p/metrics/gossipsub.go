@@ -95,19 +95,19 @@ func (g *GossipCollector) RemovePeer(id peer.ID) {
 }
 
 // Join is invoked when a new topic is joined.
-func (g *GossipCollector) Join(string) {}
+func (*GossipCollector) Join(string) {}
 
 // Leave is invoked when a topic is abandoned.
-func (g *GossipCollector) Leave(string) {}
+func (*GossipCollector) Leave(string) {}
 
 // Graft is invoked when a new peer is grafted on the mesh (gossipsub).
-func (g *GossipCollector) Graft(peer.ID, string) {}
+func (*GossipCollector) Graft(peer.ID, string) {}
 
 // Prune is invoked when a peer is pruned from the message (gossipsub).
-func (g *GossipCollector) Prune(peer.ID, string) {}
+func (*GossipCollector) Prune(peer.ID, string) {}
 
 // ValidateMessage is invoked when a message first enters the validation pipeline.
-func (g *GossipCollector) ValidateMessage(msg *pubsub.Message) {
+func (*GossipCollector) ValidateMessage(msg *pubsub.Message) {
 	if msg.Topic == nil {
 		return
 	}
@@ -116,7 +116,7 @@ func (g *GossipCollector) ValidateMessage(msg *pubsub.Message) {
 }
 
 // DeliverMessage is invoked when a message is delivered.
-func (g *GossipCollector) DeliverMessage(msg *pubsub.Message) {
+func (*GossipCollector) DeliverMessage(msg *pubsub.Message) {
 	if msg.Topic == nil {
 		return
 	}
@@ -126,10 +126,10 @@ func (g *GossipCollector) DeliverMessage(msg *pubsub.Message) {
 
 // RejectMessage is invoked when a message is Rejected or Ignored.
 // The reason argument can be one of the named strings Reject*.
-func (g *GossipCollector) RejectMessage(*pubsub.Message, string) {}
+func (*GossipCollector) RejectMessage(*pubsub.Message, string) {}
 
 // DuplicateMessage is invoked when a duplicate message is dropped.
-func (g *GossipCollector) DuplicateMessage(msg *pubsub.Message) {
+func (*GossipCollector) DuplicateMessage(msg *pubsub.Message) {
 	if msg.Topic == nil {
 		return
 	}
@@ -138,17 +138,17 @@ func (g *GossipCollector) DuplicateMessage(msg *pubsub.Message) {
 }
 
 // ThrottlePeer is invoked when a peer is throttled by the peer gater.
-func (g *GossipCollector) ThrottlePeer(peer.ID) {}
+func (*GossipCollector) ThrottlePeer(peer.ID) {}
 
 // RecvRPC is invoked when an incoming RPC is received.
-func (g *GossipCollector) RecvRPC(*pubsub.RPC) {}
+func (*GossipCollector) RecvRPC(*pubsub.RPC) {}
 
 // SendRPC is invoked when a RPC is sent.
-func (g *GossipCollector) SendRPC(*pubsub.RPC, peer.ID) {}
+func (*GossipCollector) SendRPC(*pubsub.RPC, peer.ID) {}
 
 // DropRPC is invoked when an outbound RPC is dropped, typically because of a queue full.
-func (g *GossipCollector) DropRPC(*pubsub.RPC, peer.ID) {}
+func (*GossipCollector) DropRPC(*pubsub.RPC, peer.ID) {}
 
 // UndeliverableMessage is invoked when the consumer of Subscribe is not reading messages fast enough and
 // the pressure release mechanism trigger, dropping messages.
-func (g *GossipCollector) UndeliverableMessage(*pubsub.Message) {}
+func (*GossipCollector) UndeliverableMessage(*pubsub.Message) {}

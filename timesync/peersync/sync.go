@@ -37,7 +37,7 @@ type Time interface {
 
 type systemTime struct{}
 
-func (s systemTime) Now() time.Time {
+func (systemTime) Now() time.Time {
 	return time.Now()
 }
 

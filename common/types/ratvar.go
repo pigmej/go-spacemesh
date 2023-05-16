@@ -23,6 +23,6 @@ func (r *RatVar) Set(s string) error {
 }
 
 // Type returns *big.Rat type.
-func (r *RatVar) Type() string {
+func (*RatVar) Type() string {
 	return "*big.Rat"
 }

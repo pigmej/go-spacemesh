@@ -25,7 +25,7 @@ func (s stringToString) Set(val string) error {
 	return nil
 }
 
-func (s stringToString) Type() string {
+func (stringToString) Type() string {
 	return "string=string"
 }
 

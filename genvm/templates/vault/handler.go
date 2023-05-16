@@ -25,12 +25,12 @@ func Register(reg *registry.Registry) {
 type handler struct{}
 
 // Parse is noop on vault template.
-func (h *handler) Parse(host core.Host, method uint8, decoder *scale.Decoder) (core.ParseOutput, error) {
+func (*handler) Parse(host core.Host, method uint8, decoder *scale.Decoder) (core.ParseOutput, error) {
 	return core.ParseOutput{}, nil
 }
 
 // New instantiates vault state.
-func (h *handler) New(args any) (core.Template, error) {
+func (*handler) New(args any) (core.Template, error) {
 	spawn := args.(*SpawnArguments)
 	if spawn.InitialUnlockAmount > spawn.TotalAmount {
 		return nil, fmt.Errorf("initial %d should be less or equal to total %d", spawn.InitialUnlockAmount, spawn.TotalAmount)
@@ -49,7 +49,7 @@ func (h *handler) New(args any) (core.Template, error) {
 }
 
 // Load vault from state.
-func (h *handler) Load(state []byte) (core.Template, error) {
+func (*handler) Load(state []byte) (core.Template, error) {
 	dec := scale.NewDecoder(bytes.NewBuffer(state))
 	vault := &Vault{}
 	if _, err := vault.DecodeScale(dec); err != nil {
@@ -59,7 +59,7 @@ func (h *handler) Load(state []byte) (core.Template, error) {
 }
 
 // Exec supports only MethodSpend.
-func (h *handler) Exec(host core.Host, method uint8, args scale.Encodable) error {
+func (*handler) Exec(host core.Host, method uint8, args scale.Encodable) error {
 	if method != core.MethodSpend {
 		return fmt.Errorf("%w: unknown method %d", core.ErrMalformed, method)
 	}
@@ -68,7 +68,7 @@ func (h *handler) Exec(host core.Host, method uint8, args scale.Encodable) error
 }
 
 // Args ...
-func (h *handler) Args(method uint8) scale.Type {
+func (*handler) Args(method uint8) scale.Type {
 	switch method {
 	case core.MethodSpawn:
 		return &SpawnArguments{}

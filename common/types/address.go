@@ -145,6 +145,6 @@ func GenerateAddress(publicKey []byte) Address {
 }
 
 // GetHRPNetwork returns the Human-Readable-Part of bech32 addresses for a networkID.
-func (a Address) GetHRPNetwork() string {
+func (Address) GetHRPNetwork() string {
 	return conf.NetworkHRP
 }

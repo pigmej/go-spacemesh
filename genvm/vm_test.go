@@ -74,7 +74,7 @@ func (a *singlesigAccount) getAddress() core.Address {
 	return a.address
 }
 
-func (a *singlesigAccount) getTemplate() core.Address {
+func (*singlesigAccount) getTemplate() core.Address {
 	return wallet.TemplateAddress
 }
 
@@ -96,15 +96,15 @@ func (a *singlesigAccount) spawnArgs() scale.Encodable {
 	return &args
 }
 
-func (a *singlesigAccount) baseGas(method uint8) int {
+func (*singlesigAccount) baseGas(method uint8) int {
 	return int(wallet.BaseGas(method))
 }
 
-func (a *singlesigAccount) loadGas() int {
+func (*singlesigAccount) loadGas() int {
 	return int(wallet.LoadGas())
 }
 
-func (a *singlesigAccount) execGas(method uint8) int {
+func (*singlesigAccount) execGas(method uint8) int {
 	return int(wallet.ExecGas(method))
 }
 
@@ -210,7 +210,7 @@ type vaultAccount struct {
 	totalAmount, initialUnlock uint64
 }
 
-func (a *vaultAccount) getTemplate() core.Address {
+func (*vaultAccount) getTemplate() core.Address {
 	return vault.TemplateAddress
 }
 
@@ -218,15 +218,15 @@ func (a *vaultAccount) getAddress() core.Address {
 	return a.address
 }
 
-func (a *vaultAccount) spend(to core.Address, amount uint64, nonce core.Nonce, opts ...sdk.Opt) []byte {
+func (*vaultAccount) spend(to core.Address, amount uint64, nonce core.Nonce, opts ...sdk.Opt) []byte {
 	return nil
 }
 
-func (a *vaultAccount) selfSpawn(nonce core.Nonce, opts ...sdk.Opt) []byte {
+func (*vaultAccount) selfSpawn(nonce core.Nonce, opts ...sdk.Opt) []byte {
 	return nil
 }
 
-func (a *vaultAccount) spawn(template core.Address, args scale.Encodable, nonce core.Nonce, opts ...sdk.Opt) []byte {
+func (*vaultAccount) spawn(template core.Address, args scale.Encodable, nonce core.Nonce, opts ...sdk.Opt) []byte {
 	return nil
 }
 
@@ -240,15 +240,15 @@ func (a *vaultAccount) spawnArgs() scale.Encodable {
 	}
 }
 
-func (a *vaultAccount) baseGas(uint8) int {
+func (*vaultAccount) baseGas(uint8) int {
 	return 0
 }
 
-func (a *vaultAccount) loadGas() int {
+func (*vaultAccount) loadGas() int {
 	return 0
 }
 
-func (a *vaultAccount) execGas(uint8) int {
+func (*vaultAccount) execGas(uint8) int {
 	return 0
 }
 
@@ -599,7 +599,7 @@ type change interface {
 
 type same struct{}
 
-func (ch same) verify(tb testing.TB, prev, current *core.Account) {
+func (same) verify(tb testing.TB, prev, current *core.Account) {
 	tb.Helper()
 	require.Equal(tb, prev, current)
 }

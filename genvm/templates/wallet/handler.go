@@ -72,7 +72,7 @@ func (*handler) Exec(host core.Host, method uint8, args scale.Encodable) error {
 }
 
 // Args ...
-func (h *handler) Args(method uint8) scale.Type {
+func (*handler) Args(method uint8) scale.Type {
 	switch method {
 	case core.MethodSpawn:
 		return &SpawnArguments{}

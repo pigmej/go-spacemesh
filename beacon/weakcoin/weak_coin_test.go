@@ -63,7 +63,7 @@ func nonceFetcher(tb testing.TB, ctrl *gomock.Controller) *weakcoin.MocknonceFet
 // clock is interacted with.
 type stubClock struct{}
 
-func (c *stubClock) WeakCoinProposalSendTime(epoch types.EpochID, round types.RoundID) time.Time {
+func (*stubClock) WeakCoinProposalSendTime(epoch types.EpochID, round types.RoundID) time.Time {
 	return time.Now()
 }
 
