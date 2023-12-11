@@ -16,6 +16,7 @@ var (
 	from    = flag.Int("from", 0, "from layer")
 	to      = flag.Int("to", 0, "to layer")
 	batches = flag.Int("batches", 1, "number of batches")
+	every   = flag.Int("every", 0, "every layer")
 )
 
 func calculateInclusionRates(db *sql.Database, fromLayer, toLayer int) {
@@ -40,7 +41,7 @@ func calculateInclusionRates(db *sql.Database, fromLayer, toLayer int) {
 			total += 1
 		}
 	}
-	fmt.Printf("from = %d to = %d average inclusion %f\n", *from, *to, included/total)
+	fmt.Printf("from = %d to = %d average inclusion %f\n", fromLayer, toLayer, included/total)
 }
 
 func main() {
@@ -52,15 +53,22 @@ func main() {
 		*from = *from + *to
 	}
 
-	batchSize := (*to - *from + 1) / *batches
-	for batch := 0; batch < *batches; batch++ {
-		startLayer := *from + batch*batchSize
-		endLayer := startLayer + batchSize - 1
-		if batch == *batches-1 {
-			endLayer = *to
+	if *every > 0 {
+		for i := *from; i <= *to; i += *every {
+			calculateInclusionRates(db, i, i+*every-1)
 		}
-		calculateInclusionRates(db, startLayer, endLayer)
+	} else {
+		batchSize := (*to - *from + 1) / *batches
+		for batch := 0; batch < *batches; batch++ {
+			startLayer := *from + batch*batchSize
+			endLayer := startLayer + batchSize - 1
+			if batch == *batches-1 {
+				endLayer = *to
+			}
+			calculateInclusionRates(db, startLayer, endLayer)
+		}
 	}
+
 }
 
 func must(err error) {
